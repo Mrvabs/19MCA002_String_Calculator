@@ -60,7 +60,7 @@ def MultiNumbers(numbers):
         try:
             assert int(num) > 0 
         except AssertionError :
-            print("negatives not allowed")
+            print("negatives not allowed",int(num))
         if int(num) > 0 and int(num) < 1000:
             result += int(num)
     return result
