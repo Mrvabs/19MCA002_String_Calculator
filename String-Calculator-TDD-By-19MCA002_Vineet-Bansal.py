@@ -50,8 +50,7 @@ def Add(NumString):
         return MultiNumbers(numbers)
     else:
         delim = ","
-        if NumString[1]!=",":
-            delim="\n"
+        NumString = NumString.replace('\n', ',')
         numbers = NumString.split(delim)
         return MultiNumbers(numbers)
 def MultiNumbers(numbers):
