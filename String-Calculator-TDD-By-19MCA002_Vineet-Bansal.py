@@ -19,7 +19,7 @@ def TestCase():
     assert(Add("//-\n1-2-3") == 6),"Given String \"//-\n1-2-3\" doesn't return 6"
 
     #5 Calling Add with a negative number
-    assert(Add("//;\n-1;-2;-3;2") == 2),"Given String \"//;\n-1;-2;-3;2\" doesn't return 2"
+    assert(Add("//;\n-1;-2;-3;2")),"Given String \"//;\n-1;-2;-3;2\" doesn't return any Value"
 
     #6 Numbers bigger than 1000 should be ignored, so Adding 2 + 1001 = 2
     assert(Add("//;\n1000;2") == 2),"Given String \"//;\n1000;2\" doesn't return 2"
@@ -48,11 +48,13 @@ def Add(NumString):
             delim=delim+lines[0][char]
         numbers = lines[1].split(delim)
         return MultiNumbers(numbers)
+    # elif any(number < 0 for number in NumString):
+        # pass
     else:
         delim = ","
         NumString = NumString.replace('\n', ',')
-        numbers = NumString.split(delim)
-        return MultiNumbers(numbers)
+        numbers = map(int, NumString.split(','))
+        return sum(numbers)
 def MultiNumbers(numbers):
     result = 0
     status=0
