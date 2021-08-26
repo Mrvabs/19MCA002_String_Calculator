@@ -22,7 +22,7 @@ def TestCase():
     assert(Add("//;\n-1;-2;-3;2")),"Given String \"//;\n-1;-2;-3;2\" doesn't return any Value"
 
     #6 Numbers bigger than 1000 should be ignored, so Adding 2 + 1001 = 2
-    assert(Add("1000,2") == 2),"Given String \"//;\n1000;2\" doesn't return 2"
+    assert(Add("1000,2") == 2),"Given String 1000,2 doesn't return 2"
 
     #7 Delimiters can be of any length with the following format
     assert(Add("//-----\n1-----2-----3") == 6),"Given String \"//----\n1----2----3\" doesn't return 6"
