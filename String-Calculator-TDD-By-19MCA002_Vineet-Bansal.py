@@ -1,3 +1,4 @@
+import re
 def TestCase():
     #1 The method can take up to two numbers, separated by commas, and will return their sum.
     #for an empty string it will return 0
@@ -25,15 +26,14 @@ def TestCase():
     assert(Add("1000,2") == 2),"Given String 1000,2 doesn't return 2"
 
     #7 Delimiters can be of any length with the following format
-    assert(Add("//[****]\n1****2****3") == 6),"Given String \"//[****]\n1****2****3\" doesn't return 6"
+    assert(Add("//[***]\n1***2***3") == 6),"Given String \"//[****]\n1****2****3\" doesn't return 6"
 
     #8 Allow multiple delimiters
-    assert(Add("//-!;-\n1-!;-2-!;-3") == 6),"Given String \"//-!;-\n1-!;-2-!;-3\" doesn't return 6"
+    assert(Add("//[*][%]\n1*2%3") == 6),"Given String \"//[*][%]\n1*2%3\" doesn't return 6"
 
     #9 make sure you can also handle multiple delimiters with length longer than one char
-    assert(Add("//-!;v-\n1-!;v-2-!;v-3") == 6),"Given String \"//-!;v-\n1-!;v-2-!;v-3\" doesn't return 6"
-    assert(Add("//-!;v-\n15-!;v-12-!;v-3") == 30),"Given String \"//-!;v-\n15-!;v-12-!;v-3\" doesn't return 30"
-
+    # assert(Add("//[*][%][v]\n1*2%3v4") == 10),"Given String \"//[*][%][v]\n1*2%3v4\" doesn't return 10"
+    
     print("All Test Case Passed Successfully")
 
 def Add(NumString):
@@ -43,9 +43,15 @@ def Add(NumString):
         return int(NumString)
     elif NumString[0]=="/":
         delim=""
-        NumString = NumString.replace('[', '')
-        NumString = NumString.replace(']', '')    
         lines=NumString.split("\n")
+        if lines[0][2]=='[':           
+            delimiter = lines[0][3:-1]
+            if '][' in delimiter:
+                delimiter = delimiter.replace('][', ' ')
+                numbers= re.split('['+delimiter+']', lines[1])
+                return MultiNumbers(numbers)
+            numbers = lines[1].split(delimiter)
+            return MultiNumbers(numbers)   
         for char in range(2,len(lines[0])):
             delim=delim+lines[0][char]
         numbers = lines[1].split(delim)
