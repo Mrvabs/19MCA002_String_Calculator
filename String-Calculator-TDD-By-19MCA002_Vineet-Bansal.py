@@ -25,7 +25,7 @@ def TestCase():
     assert(Add("1000,2") == 2),"Given String 1000,2 doesn't return 2"
 
     #7 Delimiters can be of any length with the following format
-    assert(Add("//-----\n1-----2-----3") == 6),"Given String \"//----\n1----2----3\" doesn't return 6"
+    assert(Add("//[****]\n1****2****3") == 6),"Given String \"//[****]\n1****2****3\" doesn't return 6"
 
     #8 Allow multiple delimiters
     assert(Add("//-!;-\n1-!;-2-!;-3") == 6),"Given String \"//-!;-\n1-!;-2-!;-3\" doesn't return 6"
@@ -43,6 +43,8 @@ def Add(NumString):
         return int(NumString)
     elif NumString[0]=="/":
         delim=""
+        NumString = NumString.replace('[', '')
+        NumString = NumString.replace(']', '')    
         lines=NumString.split("\n")
         for char in range(2,len(lines[0])):
             delim=delim+lines[0][char]
