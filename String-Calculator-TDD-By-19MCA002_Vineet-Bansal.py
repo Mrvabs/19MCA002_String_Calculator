@@ -32,7 +32,7 @@ def TestCase():
     assert(Add("//[*][%]\n1*2%3") == 6),"Given String \"//[*][%]\n1*2%3\" doesn't return 6"
 
     #9 make sure you can also handle multiple delimiters with length longer than one char
-    # assert(Add("//[*][%][v]\n1*2%3v4") == 10),"Given String \"//[*][%][v]\n1*2%3v4\" doesn't return 10"
+    assert(Add("//[*][%][v]\n1*2%3v4") == 10),"Given String \"//[*][%][v]\n1*2%3v4\" doesn't return 10"
     
     print("All Test Case Passed Successfully")
 
