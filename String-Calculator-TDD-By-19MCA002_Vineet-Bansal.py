@@ -32,7 +32,7 @@ def TestCase():
     assert(Add("//[*][%]\n1*2%3") == 6),"Given String \"//[*][%]\n1*2%3\" doesn't return 6"
 
     #9 make sure you can also handle multiple delimiters with length longer than one char
-    assert(Add("//[*][%][v]\n1*2%3v4") == 10),"Given String \"//[*][%][v]\n1*2%3v4\" doesn't return 10"
+    assert(Add("//[***][+++]\n1***2+++3") == 6),"Given String \"[***][+++]\n1***2+++3\" doesn't return 6"
     
     print("All Test Case Passed Successfully")
 
@@ -47,8 +47,9 @@ def Add(NumString):
         if lines[0][2]=='[':           
             delimiter = lines[0][3:-1]
             if '][' in delimiter:
-                delimiter = delimiter.replace('][', ' ')
+                delimiter = delimiter.replace('][', '')
                 numbers= re.split('['+delimiter+']', lines[1])
+                numbers=[i for i in numbers if i]
                 return MultiNumbers(numbers)
             numbers = lines[1].split(delimiter)
             return MultiNumbers(numbers)   
@@ -68,7 +69,7 @@ def MultiNumbers(numbers):
     flag=1
     for num in numbers:
         try:
-            assert int(num) > 0 
+            assert int(num) > 0
         except AssertionError :
             status=1
             flag=0
